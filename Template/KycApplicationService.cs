@@ -16,7 +16,7 @@ class KycApplicationService
 
         var firstAction = StepAction.START_EDV; // START_EDV
 
-        var stepAction = StepFactory.create(firstAction); // new StartEdvStepAction();
+        var stepAction = StepFactory.CreateStep(firstAction); // new StartEdvStepAction();
 
         var result = ExecuteStepAction(stepAction, kycApp);
 
