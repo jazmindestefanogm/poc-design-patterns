@@ -1,9 +1,9 @@
-class StartEdvStepAction : StepActionTemplate {
+class StartIdvStepAction : StepActionTemplate {
 
     string action = "START_EDV";
     EDVerificationService _edverificationService;
 
-    public StartEdvStepAction(EDVerificationService eDVerificationService) => _edverificationService = eDVerificationService;
+    public StartIdvStepAction(EDVerificationService eDVerificationService) => _edverificationService = eDVerificationService;
 
     public override bool CheckPreCondition() 
     {
@@ -47,7 +47,26 @@ class StartEdvStepAction : StepActionTemplate {
         return true; 
     }
 
-    public override void CreateNewStep() => new EDVStep();
+    public override void CreateNewStep() => new EDVerificationStep();
 
 
+}
+
+internal class EDVerificationStep
+{
+    public EDVerificationStep()
+    {
+    }
+}
+
+internal class EDVerificationService
+{
+    public EDVerificationService()
+    {
+    }
+
+    internal CurrentStepStatus Verify(string v)
+    {
+        throw new NotImplementedException();
+    }
 }

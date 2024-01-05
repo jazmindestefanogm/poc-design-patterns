@@ -1,13 +1,18 @@
-
 public class StepFactory
 {
-    public static Step? CreateStep(StepAction action) {
+    EDVerificationService _eDVerificationService;
+
+    public StepFactory(EDVerificationService eDVerificationService) {
+        _eDVerificationService = eDVerificationService;
+    }
+
+    public static StepActionTemplate? CreateStepAction(StepAction action) {
         switch (action) 
         {
             case StepAction.START_EDV:
-                return new EDVStep();
+                return new StartEdvStepAction(_eDVerificationService);
             case StepAction.START_IDV:
-                return new IDVStep();
+                return new StartIdvStepAction(_iDVerificationService);
             default:
                 return null;
         }
