@@ -60,7 +60,7 @@ class KycApplicationService
       public async Task<ServiceResponse<KycApplicationActionDto>> PerformStepAction(string kycApplicationId, StepAction stepAction, string metadata)
   {
       var serviceResponse = new ServiceResponse<KycApplicationActionDto>();
-      var kycApplication = _kycApplicationRepository.Get(new Guid(kycApplicationId));
+      KycApplicationDto kycApplication = (KycApplicationDto)_kycApplicationRepository.Get(new Guid(kycApplicationId));
 
       if (kycApplication is null)
       {
@@ -69,7 +69,7 @@ class KycApplicationService
       }
 
         // pre condicion para idv
-      if (stepAction == StepAction.START_IDV && kycApplication.StartIdvAttemptsExcedeed())
+      if (stepAction == StepAction.START_IDV && (kycApplication.StartIdvAttemptsExcedeed() > 3))
       {
           serviceResponse.AddError(KycKuadyErrors.RetryLimitExceeded.Code, KycKuadyErrors.RetryLimitExceeded.Message);
           return serviceResponse;
@@ -138,6 +138,11 @@ public class KycApplicationDto
     }
 
     internal static bool HasAlreadyAnActiveApplication(string customerId)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal int StartIdvAttemptsExcedeed()
     {
         throw new NotImplementedException();
     }
