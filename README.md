@@ -164,3 +164,132 @@ static void Main(string[] args)
     textDocument.Save();
 }
 ```
+
+## Strategy Pattern
+
+- The strategy pattern gives you the flexibility to choose the right strategy for a task, just like selecting the most suitable tool from a toolbox. This approach makes your code more modular and adaptable, as you can plug in different strategies without making major changes to your overall program.
+
+### Problem
+
+Imagine you're a chef and you have different ways to cook a dish. You can bake, fry, or steam the food. Each cooking method represents a strategy. Now, instead of hard-coding a specific cooking method in your recipe, you can use the strategy pattern. You define an interface called "CookingStrategy" with a common method, let's say "Cook()", and create separate classes for each cooking method that implement this interface (e.g., "BakingStrategy", "FryingStrategy", "SteamingStrategy").
+
+### Example
+
+- To start, we need to create an interface called ICookingStrategy, which will act as our Strategy interface. This interface will declare a common method Cook() that represents the cooking action. It serves as a contract that all cooking strategies must adhere to.
+
+```csharp
+// Define the CookingStrategy interface
+public interface ICookingStrategy
+{
+    void Cook();
+}
+```
+
+- The next step is to create multiple classes that implement the ICookingStrategy interface. Each implementation will provide specific instructions for a particular cooking method within its Cook() method.
+
+```csharp
+// Implement the BakingStrategy
+public class BakingStrategy : ICookingStrategy
+{
+    public void Cook()
+    {
+        Console.WriteLine("Baking the dish...");
+        // Add specific instructions for baking
+    }
+}
+
+// Implement the FryingStrategy
+public class FryingStrategy : ICookingStrategy
+{
+    public void Cook()
+    {
+        Console.WriteLine("Frying the dish...");
+        // Add specific instructions for frying
+    }
+}
+
+// Implement the SteamingStrategy
+public class SteamingStrategy : ICookingStrategy
+{
+    public void Cook()
+    {
+        Console.WriteLine("Steaming the dish...");
+        // Add specific instructions for steaming
+    }
+}
+```
+
+- Next, we'll introduce a Chef class that makes use of the strategy pattern.
+
+```csharp
+// Chef class that utilizes the strategy pattern
+public class Chef
+{
+    private ICookingStrategy _cookingStrategy;
+
+    // Set the cooking strategy
+    public void SetCookingStrategy(ICookingStrategy cookingStrategy)
+    {
+        _cookingStrategy = cookingStrategy;
+    }
+
+    // Cook the dish using the selected strategy
+    public void CookDish()
+    {
+        Console.WriteLine("Preparing the dish...");
+        _cookingStrategy.Cook();
+        // Additional steps for dish preparation
+        Console.WriteLine("Dish is ready!");
+    }
+}
+```
+
+- Finally, we can utilize the pattern in the following manner
+
+```csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a Chef instance
+        Chef chef = new Chef();
+
+        // Create different cooking strategies
+        ICookingStrategy bakingStrategy = new BakingStrategy();
+        ICookingStrategy fryingStrategy = new FryingStrategy();
+        ICookingStrategy steamingStrategy = new SteamingStrategy();
+
+        // Set the baking strategy
+        chef.SetCookingStrategy(bakingStrategy);
+        chef.CookDish(); // The dish will be baked
+
+        // Set the frying strategy
+        chef.SetCookingStrategy(fryingStrategy);
+        chef.CookDish(); // The dish will be fried
+
+        // Set the steaming strategy
+        chef.SetCookingStrategy(steamingStrategy);
+        chef.CookDish(); // The dish will be steamed
+    }
+}
+```
+
+### When to use the strategy pattern
+
+Strategy pattern is a good choice when you need flexibility and modularity in choosing and swapping out different algorithms or behaviors at runtime.
+
+### Pros and cons of using the strategy pattern
+
+✔️ Improved code organization
+
+✔️ Flexibility and extensibility
+
+✔️ Code reusability
+
+✔️ Separation of concerns
+
+❌ Increases the complexity of the code
+
+❌ Potential performance overhead
+
+❌ Increased number of classes
