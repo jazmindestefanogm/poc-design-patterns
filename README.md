@@ -11,6 +11,7 @@ Example → You’re trying to create a report generator and you create a factor
 
 In this example, the `ReportGeneratorFactory` class provides different report generators based on the client’s input, where objects are generated through the `GetReportGenerator` method.
 
+```csharp
     public abstract class Factory
     {
         public abstract ILiteratureFactory MakeLiteratureFactory();
@@ -78,6 +79,7 @@ In this example, the `ReportGeneratorFactory` class provides different report 
 
         }
     }
+```
 
 ## Template Pattern
 
