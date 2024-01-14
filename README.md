@@ -118,13 +118,13 @@ public class LiteratureAcademy: Factory
 {
     public override ILiteratureFactory MakeLiteratureFactory(FactoryEnum factory)
     {
-				switch (factory)
-				{
-					case factory.FICTION:
-								return new FictionFactory();
-					case factory.NON_FICTION:
-								return new NonFictionFactory();
-				}
+		switch (factory)
+		{
+			case factory.FICTION:
+				return new FictionFactory();
+			case factory.NON_FICTION:
+				return new NonFictionFactory();
+		}
 
     }
 }
