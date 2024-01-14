@@ -58,7 +58,7 @@ class KycApplicationService
     }
 
       public async Task<ServiceResponse<KycApplicationActionDto>> PerformStepAction(string kycApplicationId, StepAction stepAction, string metadata)
-  {
+    {
       var serviceResponse = new ServiceResponse<KycApplicationActionDto>();
       KycApplicationDto kycApplication = (KycApplicationDto)_kycApplicationRepository.Get(new Guid(kycApplicationId));
 
@@ -90,95 +90,4 @@ class KycApplicationService
 
       return serviceResponse;
   }
-}
-
-public class KycApplicationActionDto
-{
-}
-
-internal class _kycApplicationRepository
-{
-    internal static Task<object> AddAsync(KycApplication kycApp, object cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static Task<object> AddAsync(KycApplicationDto kycApp, string v)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static object Get(Guid guid)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class KycApplicationDto
-{
-    private KycApplication kycApp;
-    private string customerId;
-    private object kycConfig;
-    private KycApplicationDto kycApp1;
-
-    public KycApplicationDto(KycApplication kycApp)
-    {
-        this.kycApp = kycApp;
-    }
-
-    public KycApplicationDto(KycApplicationDto kycApp1)
-    {
-        this.kycApp1 = kycApp1;
-    }
-
-    public KycApplicationDto(string customerId, object kycConfig)
-    {
-        this.customerId = customerId;
-        this.kycConfig = kycConfig;
-    }
-
-    internal static bool HasAlreadyAnActiveApplication(string customerId)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal int StartIdvAttemptsExcedeed()
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void UpdateCurrentStepStatus(CurrentStepStatus stepStatus)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void UpdateNextAction(StepAction kycApplicationNextAction)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void UpdateStatus(KycApplicationStatus status)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class ServiceResponse<T>
-{
-    public KycApplicationDto? Data { get; internal set; }
-
-    internal ServiceResponse<KycApplicationDto> addError(object kuady, object error)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal ServiceResponse<KycApplicationDto> addError(string v)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void AddError(object value)
-    {
-        throw new NotImplementedException();
-    }
 }
