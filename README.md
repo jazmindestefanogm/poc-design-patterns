@@ -1,5 +1,7 @@
 # Design Patterns
 
+This repository is implements solutions for Kuady 6 Pay Retailers Team, examples below just explain a bit more about Desing Patterns.
+
 ## Factory Pattern
 
 - The basic Factory Pattern is a design pattern that generally provides a way to create objects without specifying the exact class of the object that will be created. It involves a single method that returns a new instance of a class, often based on input parameters.
