@@ -2,16 +2,63 @@
 
 This repository is implements solutions for Kuady 6 Pay Retailers Team, examples below just explain a bit more about Desing Patterns.
 
-## Factory Pattern
+# Factory
 
 - The basic Factory Pattern is a design pattern that generally provides a way to create objects without specifying the exact class of the object that will be created. It involves a single method that returns a new instance of a class, often based on input parameters.
 - This pattern is typically used when the creation logic of the objects is not simple, but the types of objects are not numerous and do not form a hierarchy. Otherwise, this variation of the design pattern may not hold up as well.
 
-## Factory Example
+## Factory Pattern
 
 Example → You’re trying to create a report generator and you create a factory called `ReportGeneratorFactory` that employs an interface called `IReportGenerator`. Thus, all report generator classes must implement the `IReportGenerator` interface and set up any specific types of constructors required.
 
 In this example, the `ReportGeneratorFactory` class provides different report generators based on the client’s input, where objects are generated through the `GetReportGenerator` method.
+
+```csharp
+public interface IReportGenerator
+{
+    string GenerateReport();
+}
+
+public class XmlReportGenerator : IReportGenerator
+{
+    public string GenerateReport()
+    {
+        return "This is an generated Xml Report.";
+    }
+}
+
+public class CsvReportGenerator : IReportGenerator
+{
+    public string GenerateReport()
+    {
+        return "This is an generated Csv Report.";
+    }
+}
+
+public class ReportGeneratorFactory
+{
+    public IReportGenerator GetReportGenerator(string format)
+    {
+        switch (format.ToLower())
+        {
+            case "xml":
+                return new XmlReportGenerator();
+            case "csv":
+                return new CsvReportGenerator();
+            default:
+                throw new ApplicationException("Report format not supported.");
+        }
+    }
+}
+```
+
+## Abstract Factory Pattern
+
+Here are the steps to building a complex Factory pattern:
+
+1. Create an abstract `Factory` class that all factories at the application level will implement.
+2. In the abstract `Factory` class, you can define a method that creates application-specific factories.
+3. Each application-specific factory will have its interface that will be used to create each class.
 
 ```csharp
 public abstract class Factory
@@ -63,25 +110,33 @@ public class NonFictionFactory : ILiteratureFactory
 
 public enum FactoryEnum
 {
-    FICTION,
-    NON_FICTION
+	FICTION,
+	NON_FICTION
 }
 
 public class LiteratureAcademy: Factory
 {
     public override ILiteratureFactory MakeLiteratureFactory(FactoryEnum factory)
     {
-        switch (factory)
-        {
-            case factory.FICTION:
-                return new FictionFactory();
-            case factory.NON_FICTION:
-                return new NonFictionFactory();
-        }
+				switch (factory)
+				{
+					case factory.FICTION:
+								return new FictionFactory();
+					case factory.NON_FICTION:
+								return new NonFictionFactory();
+				}
 
     }
 }
 ```
+
+### Best Practices When Using the Factory Pattern in C
+
+When using the Factory pattern in C#, there are some best practices you should keep in mind. Here are some examples:
+
+- Use the Factory class to prevent objects from being created directly by construction.
+- Always define an interface or abstract class to be implemented by the object classes.
+- Use an enumeration or a configuration file to define the Factory input parameters. Try using enums!
 
 ## Template Pattern
 
