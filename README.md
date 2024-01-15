@@ -351,11 +351,11 @@ Strategy pattern is a good choice when you need flexibility and modularity in ch
 
 ## Dependency Injection Pattern
 
-## What is Dependency Injection?
+### What is Dependency Injection?
 
 At its core, dependency injection aims to separate the creation and use of object dependencies. Rather than having classes create their own dependencies directly using new, dependencies are provided to classes from an external source. This external provider is known as an injector and is responsible for instantiating dependencies and supplying them to client classes as needed.
 
-## Why Use Dependency Injection?
+### Why Use Dependency Injection?
 
 There are several key benefits to using DI:
 
