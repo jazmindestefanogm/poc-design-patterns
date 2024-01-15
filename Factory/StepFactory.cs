@@ -1,8 +1,8 @@
 public class StepFactory
 {
-    EDVerificationService _eDVerificationService;
+    IEDVerificationService _eDVerificationService;
 
-    public StepFactory(EDVerificationService eDVerificationService) {
+    public StepFactory(IEDVerificationService eDVerificationService) {
         _eDVerificationService = eDVerificationService;
     }
 
