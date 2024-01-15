@@ -348,3 +348,60 @@ Strategy pattern is a good choice when you need flexibility and modularity in ch
 ❌ Potential performance overhead
 
 ❌ Increased number of classes
+
+## Dependency Injection Pattern
+
+## What is Dependency Injection?
+
+At its core, dependency injection aims to separate the creation and use of object dependencies. Rather than having classes create their own dependencies directly using new, dependencies are provided to classes from an external source. This external provider is known as an injector and is responsible for instantiating dependencies and supplying them to client classes as needed.
+
+## Why Use Dependency Injection?
+
+There are several key benefits to using DI:
+
+- **Removes tight coupling between classes:** Classes have no knowledge of how their dependencies are created, only that they will be provided from somewhere. This makes code more modular and flexible.
+- **Enables easy mocking of dependencies for testing:** Dependencies can be swapped for mock objects that simulate behavior without complex real implementations.
+- **Simplifies switching implementations:** The injector configures which dependency implementations to use. Switching implementations does not require any changes to client classes.
+- **Promotes code reuse:** Common dependencies can be shared across multiple classes through the injector.
+- **Configuration through code:** Dependency configuration is specified in code rather than through manual wiring. This makes it easier to track dependencies and how they are created.
+
+```csharp
+public interface IMessageService
+{
+    string GetMessage();
+}
+
+public class MessageService : IMessageService
+{
+    public string GetMessage()
+    {
+        return "Hello World!";
+    }
+}
+```
+
+in Program.cs:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton<IMessageService, MessageService>();
+}
+```
+
+```csharp
+public class MyClass
+{
+    private IMessageService _messageService;
+
+    public MyClass(IMessageService messageService)
+    {
+        _messageService = messageService;
+    }
+
+    public string GetMessage()
+    {
+        return _messageService.GetMessage();
+    }
+}
+```
