@@ -1,3 +1,12 @@
+/*
+El strategy al principio lo pensabamos para todo el comportamiento de cada step (EDV/IDV).
+Ahora creo que aplica más el template para eso.
+Pero si lo podriamos usar para los distintos comportamientos que puede tener un step especifico.
+Por ej, el EDV Step podria tener 2 strategies (AristotleStrategy y DataHubStrategy) 
+que se utilizan en el "perform", el metodo que se conecta a un provider, le manda info 
+y segun la respuesta define un estado nuevo.
+*/
+
 public interface IStepStrategy
 {
     void ExecuteStep();
