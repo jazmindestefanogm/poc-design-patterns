@@ -16,6 +16,13 @@ class KycApplicationService
 
         var firstAction = StepAction.START_EDV; // START_EDV
 
+        // ************************************************************//
+        /* Todo este bloque deberia estar en un metodo aparte, o en una
+        especie de "StepManager" o "StepRunner". Que seria utilizado por el
+        StartKycApplication() y por el PerformStepAction() de este service.
+        En base a una kycApp, ejecuta un stepAction alterando el estado
+        que corresponda. */
+        // ************************************************************//
         var stepAction = StepFactory.CreateStepAction(firstAction); // new StartEdvStepAction();
 
         var result = ExecuteStepAction(stepAction, kycApp);
@@ -28,6 +35,7 @@ class KycApplicationService
         kycApp.UpdateStatus(result.Status);
         kycApp.UpdateCurrentStepStatus(result.stepStatus);
         kycApp.UpdateNextAction(result.kycApplicationNextAction);
+        // ************************************************************//
 
         object value = await _kycApplicationRepository.AddAsync(kycApp, "cancellationToken");
 
